@@ -51,7 +51,7 @@ export const attachInterceptors = (axiosClient) => {
 
 export const axiosAuth = () => {
     const axiosClient = axios.create({
-        baseURL: "https://serot_api.haloquant.com/",
+        baseURL: process.env.REACT_APP_BASE_URL,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ export const axiosAuth = () => {
 
 export const axiosSecured = () => {
     const axiosClient = axios.create({
-        baseURL: "https://serot_api.haloquant.com/",
+        baseURL: process.env.REACT_APP_BASE_URL,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export const axiosSecured = () => {
 
 export const axiosSecuredForm = () => {
     const axiosClient = axios.create({
-        baseURL: "https://serot_api.haloquant.com/",
+        baseURL: process.env.REACT_APP_BASE_URL,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'multipart/form-data'

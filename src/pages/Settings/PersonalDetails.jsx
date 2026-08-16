@@ -1,38 +1,30 @@
-import {
-    useMediaQuery,
-    useTheme, Box
-} from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 
-import MobileNavbar from "./MobileNavbar";
 import PersonalDetailsContent from "./PersonalDetailsContent";
 
 const PersonalDetails = () => {
+  const theme = useTheme();
 
-    const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-    const isMobile = useMediaQuery(
-        theme.breakpoints.down("sm")
-    );
-
-    return (
-        <>
-            {isMobile ? (
-                // <MobileNavbar>
-                <Box
-                    sx={{
-                        pt: "60px",
-                        px: { xs: 1.5, sm: 3 },
-                    }}
-                > <PersonalDetailsContent />
-                </Box>
-
-                // </MobileNavbar>
-            ) : (
-                <PersonalDetailsContent />
-            )}
-        </>
-    );
+  return (
+    <>
+      {isMobile ? (
+        // <MobileNavbar>
+        <Box
+          sx={{
+            pt: "60px",
+            px: { xs: 1.5, sm: 3 },
+          }}
+        >
+          {" "}
+          <PersonalDetailsContent />
+        </Box>
+      ) : (
+        <PersonalDetailsContent />
+      )}
+    </>
+  );
 };
-
 
 export default PersonalDetails;

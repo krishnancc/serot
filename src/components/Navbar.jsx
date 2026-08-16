@@ -1,7 +1,8 @@
 import {
   KeyboardArrowDownRounded,
   LogoutRounded,
-  NotificationsNoneRounded, PersonRounded
+  NotificationsNoneRounded,
+  PersonRounded,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -10,11 +11,12 @@ import {
   Divider,
   Popover,
   Toolbar,
-  Typography
+  Typography,
 } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getMethod } from "../api/login";
+import Serot_logo from "../images/Serot_logo.png";
 import { menus } from "./Menu";
 const Navbar = () => {
   const [notificationAnchor, setNotificationAnchor] = useState(null);
@@ -24,7 +26,6 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const notificationOpen = Boolean(notificationAnchor);
   const profileOpen = Boolean(profileAnchor);
-
 
   const [loadingUser, setLoadingUser] = useState(false);
   const PROFILE_CACHE_KEY = "user_profile_cache";
@@ -50,18 +51,13 @@ const Navbar = () => {
 
       const result = await getMethod("/api/user/profile");
 
-      console.log("Profile API:", result);
-
       if (result?.error) {
-        console.log(result.message);
+        // console.log(result.message);
         return;
       }
 
       if (result?.data) {
-        sessionStorage.setItem(
-          PROFILE_CACHE_KEY,
-          JSON.stringify(result.data)
-        );
+        sessionStorage.setItem(PROFILE_CACHE_KEY, JSON.stringify(result.data));
 
         setUser(result.data);
       }
@@ -78,7 +74,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    sessionStorage.removeItem("token")
+    sessionStorage.removeItem("token");
     sessionStorage.removeItem(PROFILE_CACHE_KEY);
     navigate("/signin", { replace: true });
   };
@@ -109,32 +105,46 @@ const Navbar = () => {
             gap: 1.5,
           }}
         >
+          {/* Logo */}
           <Box
             sx={{
-              width: 42,
-              height: 42,
-              borderRadius: 3,
+              width: 54,
+              height: 54,
+              borderRadius: "12px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              background:
-                "linear-gradient(135deg,#2563eb,#7c3aed)",
-              color: "#fff",
-              fontWeight: 900,
-              fontSize: 22,
+              // background: "linear-gradient(135deg, #2563EB, #7C3AED)",
+              overflow: "hidden",
+              flexShrink: 0,
+              // boxShadow: "0 4px 12px rgba(99, 102, 241, 0.25)",
             }}
           >
-            S
+            <Box
+              component="img"
+              src={Serot_logo}
+              alt="SEROT Logo"
+              sx={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                p: 0.7,
+                display: "block",
+              }}
+            />
           </Box>
 
+          {/* Brand Name */}
           <Typography
-            fontSize={22}
-            fontWeight={900}
             sx={{
-              background:
-                "linear-gradient(135deg,#2563eb,#7c3aed)",
+              fontSize: 20,
+              fontWeight: 900,
+              letterSpacing: "-0.5px",
+              lineHeight: 1,
+              background: "linear-gradient(135deg, #2563EB, #7C3AED)",
               backgroundClip: "text",
-              color: "transparent",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
             }}
           >
             SEROT
@@ -170,7 +180,7 @@ const Navbar = () => {
                   cursor: "pointer",
                   borderRadius: "12px",
                   color: active ? "#2563eb" : "#64748b",
-                  bgcolor: active ? "rgba(37,99,235,0.06)" : 'transparent',
+                  bgcolor: active ? "rgba(37,99,235,0.06)" : "transparent",
                   fontWeight: 600,
                   transition: "all .3s ease",
 
@@ -242,16 +252,12 @@ const Navbar = () => {
               mt: 1.5,
               width: 300,
               borderRadius: 4,
-              boxShadow:
-                "0 15px 35px rgba(0,0,0,.15)",
+              boxShadow: "0 15px 35px rgba(0,0,0,.15)",
             },
           }}
         >
           <Box sx={{ p: 2.5 }}>
-            <Typography
-              fontWeight={800}
-              fontSize={17}
-            >
+            <Typography fontWeight={800} fontSize={17}>
               Notifications
             </Typography>
 
@@ -270,18 +276,11 @@ const Navbar = () => {
                 }}
               />
 
-              <Typography
-                fontWeight={600}
-                mt={1}
-              >
+              <Typography fontWeight={600} mt={1}>
                 You have 0 unread messages
               </Typography>
 
-              <Typography
-                fontSize={12}
-                color="text.secondary"
-                mt={0.5}
-              >
+              <Typography fontSize={12} color="text.secondary" mt={0.5}>
                 You're all caught up 🎉
               </Typography>
             </Box>
@@ -368,7 +367,7 @@ const Navbar = () => {
                   whiteSpace: "nowrap",
                 }}
               >
-                User ID : {user?.superId || "-"}
+                User ID : SN {user?.superId || "-"}
               </Typography>
             </Box>
           </Box>
@@ -402,8 +401,7 @@ const Navbar = () => {
               width: 310,
               borderRadius: 4,
               overflow: "hidden",
-              boxShadow:
-                "0 20px 45px rgba(0,0,0,.18)",
+              boxShadow: "0 20px 45px rgba(0,0,0,.18)",
             },
           }}
         >
@@ -413,13 +411,12 @@ const Navbar = () => {
               p: 3,
               textAlign: "center",
               color: "#fff",
-              background:
-                "linear-gradient(135deg,#2563eb,#7c3aed)",
+              background: "linear-gradient(135deg,#2563eb,#7c3aed)",
             }}
           >
             <Avatar
               src={user?.profilePicUrl || undefined}
-              alt={user?.username || 'User'}
+              alt={user?.username || "User"}
               sx={{
                 width: 72,
                 height: 72,
@@ -434,18 +431,12 @@ const Navbar = () => {
               {user?.username?.charAt(0)?.toUpperCase()}
             </Avatar>
 
-            <Typography
-              fontWeight={900}
-              fontSize={17}
-            >
-              {loadingUser ? 'Loading...' : user?.username || '—'}
+            <Typography fontWeight={900} fontSize={17}>
+              {loadingUser ? "Loading..." : user?.username || "—"}
             </Typography>
 
-            <Typography
-              fontSize={13}
-              sx={{ opacity: 0.85 }}
-            >
-              {loadingUser ? '' : user?.email || ''}
+            <Typography fontSize={13} sx={{ opacity: 0.85 }}>
+              {loadingUser ? "" : user?.email || ""}
             </Typography>
 
             <Box
@@ -455,15 +446,11 @@ const Navbar = () => {
                 px: 2,
                 py: 0.5,
                 borderRadius: 10,
-                bgcolor:
-                  "rgba(255,255,255,.2)",
+                bgcolor: "rgba(255,255,255,.2)",
               }}
             >
-              <Typography
-                fontSize={11}
-                fontWeight={700}
-              >
-                User Id : {user?.superId}
+              <Typography fontSize={11} fontWeight={700}>
+                User Id : SN {user?.superId}
               </Typography>
             </Box>
           </Box>
@@ -487,15 +474,9 @@ const Navbar = () => {
                 },
               }}
             >
-              <PersonRounded
-                sx={{ color: "#2563eb" }}
-              />
+              <PersonRounded sx={{ color: "#2563eb" }} />
 
-              <Typography
-                fontWeight={700}
-                fontSize={14}
-
-              >
+              <Typography fontWeight={700} fontSize={14}>
                 My Profile
               </Typography>
             </Box>
@@ -519,10 +500,7 @@ const Navbar = () => {
             >
               <LogoutRounded />
 
-              <Typography
-                fontWeight={700}
-                fontSize={14}
-              >
+              <Typography fontWeight={700} fontSize={14}>
                 Logout
               </Typography>
             </Box>

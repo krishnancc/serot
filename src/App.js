@@ -1,9 +1,8 @@
-import ScrollTop from './components/ScrollTop';
-import Routes from './routes';
+import ScrollTop from "./components/ScrollTop";
+import Routes from "./routes";
 // import ThemeCustomization from './themes';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 function App() {
   return (

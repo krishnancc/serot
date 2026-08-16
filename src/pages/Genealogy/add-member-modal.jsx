@@ -62,15 +62,19 @@ const addMemberSchema = Yup.object({
   sendOTP: Yup.boolean(),
 
   verified: Yup.boolean(),
-}).test("otp-check", "Send OTP and Verified cannot both enabled", function (values) {
-  if (values?.sendOTP && values?.verified) {
-    return this.createError({
-      path: "verified",
-      message: "Send OTP and Verified cannot both enabled",
-    });
-  }
-  return true;
-});
+}).test(
+  "otp-check",
+  "Send OTP and Verified cannot both enabled",
+  function (values) {
+    if (values?.sendOTP && values?.verified) {
+      return this.createError({
+        path: "verified",
+        message: "Send OTP and Verified cannot both enabled",
+      });
+    }
+    return true;
+  },
+);
 
 /* ================= COMPONENT ================= */
 
@@ -131,7 +135,7 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
     fontWeight: 700,
     color: "#94A3B8",
     fontSize: 11.5,
-    paddingTop: "10px"
+    paddingTop: "10px",
   };
 
   const initialFormValues = {
@@ -160,7 +164,7 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
         const res = await postMethod("/api/user/add-network-user", values);
 
         if (res?.error) {
-          toast.error(res.error.message || "Failed to add member");
+          toast.error(res.error?.message || "Failed to add member");
           return;
         }
 
@@ -184,8 +188,17 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
     },
   });
 
-  const { values, errors, touched, handleChange, handleBlur, setFieldValue, handleSubmit } = formik;
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    setFieldValue,
+    handleSubmit,
+  } = formik;
 
+  const HideVerification = process.env.REACT_APP_HIDE_VERIFIED_USER === "true";
   useEffect(() => {
     if (referralId) {
       setFieldValue("referralId", referralId);
@@ -213,7 +226,9 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
       try {
         setCheckingSponsor(true);
 
-        const res = await getMethod(`/api/user/lookup-by-superid/${referralValue}`);
+        const res = await getMethod(
+          `/api/user/lookup-by-superid/${referralValue}`,
+        );
 
         setSponsor(res?.success ? res.data : null);
       } catch {
@@ -319,7 +334,7 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
             {/* ---- Account details ---- */}
             <Typography sx={sectionLabelSx}>Account details</Typography>
 
-            <Stack spacing={2}  >
+            <Stack spacing={2}>
               <TextField
                 sx={fieldSx}
                 label="Username"
@@ -335,7 +350,10 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
                   input: {
                     startAdornment: (
                       <InputAdornment position="start">
-                        <BadgeRoundedIcon sx={{ color: "#94A3B8" }} fontSize="small" />
+                        <BadgeRoundedIcon
+                          sx={{ color: "#94A3B8" }}
+                          fontSize="small"
+                        />
                       </InputAdornment>
                     ),
                   },
@@ -357,7 +375,10 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
                   input: {
                     startAdornment: (
                       <InputAdornment position="start">
-                        <LockRoundedIcon sx={{ color: "#94A3B8" }} fontSize="small" />
+                        <LockRoundedIcon
+                          sx={{ color: "#94A3B8" }}
+                          fontSize="small"
+                        />
                       </InputAdornment>
                     ),
                     endAdornment: (
@@ -389,7 +410,9 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
                 inputProps={{ inputMode: "numeric", maxLength: 10 }}
                 value={values.phoneNo}
                 onChange={(e) => {
-                  e.target.value = e.target.value.replace(/\D/g, "").slice(0, 10);
+                  e.target.value = e.target.value
+                    .replace(/\D/g, "")
+                    .slice(0, 10);
                   handleChange(e);
                 }}
                 onBlur={handleBlur}
@@ -399,8 +422,15 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
                   input: {
                     startAdornment: (
                       <InputAdornment position="start">
-                        <PhoneRoundedIcon sx={{ color: "#94A3B8", mr: -0.5 }} fontSize="small" />
-                        <Divider orientation="vertical" flexItem sx={{ mx: 1, borderColor: "#E2E8F0" }} />
+                        <PhoneRoundedIcon
+                          sx={{ color: "#94A3B8", mr: -0.5 }}
+                          fontSize="small"
+                        />
+                        <Divider
+                          orientation="vertical"
+                          flexItem
+                          sx={{ mx: 1, borderColor: "#E2E8F0" }}
+                        />
                         <Typography color="text.secondary">+91</Typography>
                       </InputAdornment>
                     ),
@@ -424,7 +454,10 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
                   input: {
                     startAdornment: (
                       <InputAdornment position="start">
-                        <MailRoundedIcon sx={{ color: "#94A3B8" }} fontSize="small" />
+                        <MailRoundedIcon
+                          sx={{ color: "#94A3B8" }}
+                          fontSize="small"
+                        />
                       </InputAdornment>
                     ),
                   },
@@ -507,66 +540,96 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
             </Stack>
 
             {/* ---- Verification ---- */}
-            <Stack spacing={1}>
-              <Typography sx={{
-                textTransform: "uppercase",
-                letterSpacing: 0.6,
-                fontWeight: 700,
-                color: "#94A3B8",
-                fontSize: 11.5
-              }}>Verification</Typography>
-
-              <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
-                <Box
-                  sx={{
-                    flex: 1,
-                    border: "1px solid #E2E8F0",
-                    borderRadius: 2.5,
-                    px: 1.5,
-                  }}
-                >
-                  <FormControlLabel
-                    sx={{ width: "100%", m: 0, justifyContent: "space-between" }}
-                    labelPlacement="start"
-                    control={<Checkbox name="sendOTP" checked={values.sendOTP} onChange={handleChange} />}
-                    label={<Typography variant="body2">Send OTP</Typography>}
-                  />
-                </Box>
-
-                {!hideVerifiedUser && (
-                  <Box
+            {HideVerification ? (
+              <>&nbsp;</>
+            ) : (
+              <>
+                {" "}
+                <Stack spacing={1}>
+                  <Typography
                     sx={{
-                      flex: 1,
-                      border: "1px solid #E2E8F0",
-                      borderRadius: 2.5,
-                      px: 1.5,
-                      opacity: values.sendOTP ? 0.5 : 1,
+                      textTransform: "uppercase",
+                      letterSpacing: 0.6,
+                      fontWeight: 700,
+                      color: "#94A3B8",
+                      fontSize: 11.5,
                     }}
                   >
-                    <FormControlLabel
-                      sx={{ width: "100%", m: 0, justifyContent: "space-between" }}
-                      labelPlacement="start"
-                      control={
-                        <Checkbox
-                          name="verified"
-                          checked={values.verified}
-                          disabled={values.sendOTP}
-                          onChange={handleChange}
+                    Verification
+                  </Typography>
+
+                  <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
+                    <Box
+                      sx={{
+                        flex: 1,
+                        border: "1px solid #E2E8F0",
+                        borderRadius: 2.5,
+                        px: 1.5,
+                      }}
+                    >
+                      <FormControlLabel
+                        sx={{
+                          width: "100%",
+                          m: 0,
+                          justifyContent: "space-between",
+                        }}
+                        labelPlacement="start"
+                        control={
+                          <Checkbox
+                            name="sendOTP"
+                            checked={values.sendOTP}
+                            onChange={handleChange}
+                          />
+                        }
+                        label={
+                          <Typography variant="body2">Send OTP</Typography>
+                        }
+                      />
+                    </Box>
+
+                    {!hideVerifiedUser && (
+                      <Box
+                        sx={{
+                          flex: 1,
+                          border: "1px solid #E2E8F0",
+                          borderRadius: 2.5,
+                          px: 1.5,
+                          opacity: values.sendOTP ? 0.5 : 1,
+                        }}
+                      >
+                        <FormControlLabel
+                          sx={{
+                            width: "100%",
+                            m: 0,
+                            justifyContent: "space-between",
+                          }}
+                          labelPlacement="start"
+                          control={
+                            <Checkbox
+                              name="verified"
+                              checked={values.verified}
+                              disabled={values.sendOTP}
+                              onChange={handleChange}
+                            />
+                          }
+                          label={
+                            <Typography variant="body2">
+                              Mark Verified
+                            </Typography>
+                          }
                         />
-                      }
-                      label={<Typography variant="body2">Mark Verified</Typography>}
-                    />
-                  </Box>
-                )}
-              </Stack>
+                      </Box>
+                    )}
+                  </Stack>
 
-              {touched.verified && errors.verified && (
-                <Typography variant="caption" color="error">
-                  {errors.verified}
-                </Typography>
-              )}
-            </Stack>
-
+                  {touched.verified && errors.verified && (
+                    <Typography variant="caption" color="error">
+                      {errors.verified}
+                    </Typography>
+                  )}
+                </Stack>
+              </>
+            )}
             {/* ---- actions live in-flow, not fixed, so they never cover content ---- */}
             <Stack
               direction={{ xs: "column-reverse", sm: "row" }}
@@ -593,12 +656,16 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
                   },
                 }}
               >
-                {formik.isSubmitting ? <CircularProgress size={22} color="inherit" /> : "Add Member"}
+                {formik.isSubmitting ? (
+                  <CircularProgress size={22} color="inherit" />
+                ) : (
+                  "Add Member"
+                )}
               </Button>
             </Stack>
           </Stack>
         </form>
       </DialogContent>
-    </Dialog >
+    </Dialog>
   );
 }
