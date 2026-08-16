@@ -37,7 +37,6 @@ const AMBER_BG = "#FFFBEB";
 const AMBER_BORDER = "#FDE68A";
 
 const QrCode = ({ size = 168, color = TEXT, depositData }) => {
-  console.log("Deposit Data in QR Code ", depositData);
   return (
     <Box
       width={size}
@@ -210,7 +209,6 @@ const SelectorField = ({ label, icon, value }) => (
 
 const Deposit = ({ crypto = [] }) => {
   const asset = crypto?.[0];
-  console.log("Deposit Asset ", asset);
 
   const [copied, setCopied] = useState(false);
 
@@ -235,7 +233,6 @@ const Deposit = ({ crypto = [] }) => {
           );
           return;
         }
-        console.log("Deposit Address Result ", result.data);
         setDepositData(result.data);
       } catch (err) {
         toast.error(err.message || "Failed to fetch deposit address");

@@ -28,8 +28,6 @@ const Rewards = () => {
 
       const res = await getMethod("/api/income/reward/get-list");
 
-      console.log("Reward Response", res);
-
       if (!res?.success) {
         toast.error(res.error?.message || "Failed to load rewards");
         return;

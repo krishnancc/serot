@@ -69,7 +69,6 @@ export default function Withdraw({
   user = {},
   onSuccess,
 }) {
-  console.log("cryptos", crypto);
   /* ===============================
        STEP STATE
        =============================== */

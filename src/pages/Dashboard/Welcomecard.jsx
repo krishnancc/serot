@@ -26,7 +26,6 @@ const INK = "#1E1B4B";
 const MUTED = "#64748B";
 
 export default function WelcomeCard({ user }) {
-  console.log("WelcomeCard user", user);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));

@@ -115,9 +115,10 @@ const StatItem = ({ title, value, subtitle, icon, accent }) => (
 
 const WalletStats = ({ balances = {}, cryptoHoldings = {}, cryptos }) => {
   const format = (value) => Number(value || 0).toLocaleString();
-  // console.log("cryptos", cryptos);
   const totalBalance =
-    (Number(balances.main?.usd) || 0) + (Number(balances.fund?.usd) || 0);
+    (Number(balances.main?.usd) || 0) +
+    (Number(balances.fund?.usd) || 0) +
+    (Number(balances.deposit?.usd) || 0);
 
   const walletData = [
     {

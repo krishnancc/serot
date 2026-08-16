@@ -74,8 +74,6 @@ const Settings = () => {
 
       const result = await getMethod("/api/user/profile");
 
-      console.log("Profile API:", result);
-
       if (result?.error) {
         // console.log(result.message);
         return;

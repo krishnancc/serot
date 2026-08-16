@@ -36,7 +36,6 @@ const menus = [
 ];
 
 const Sidebar = ({ tab, setTab, handleLogout, user, loadingUser }) => {
-  console.log("user", user);
   const navigate = useNavigate();
 
   const theme = useTheme();

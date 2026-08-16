@@ -117,9 +117,10 @@ const StatItem = ({ title, value, subtitle, icon, accent }) => (
 
 const WalletStats = ({ wallet }) => {
   const format = (value) => Number(value || 0).toLocaleString();
-
   const totalBalance =
-    (Number(wallet.mainUsd) || 0) + (Number(wallet.fundUsd) || 0);
+    (Number(wallet.mainUsd) || 0) +
+    (Number(wallet.fundUsd) || 0) +
+    (Number(wallet.depositUsd) || 0);
   const walletData = [
     {
       title: "Available Balance",
@@ -137,8 +138,8 @@ const WalletStats = ({ wallet }) => {
     },
     {
       title: "Deposit Balance",
-      value: 0,
-      subtitle: `≈ $ ${format(wallet?.cryptoUsd)} USDT`,
+      value: wallet?.depositUsd,
+      subtitle: `≈ $ ${format(wallet?.depositUsd)} USDT`,
       icon: <CurrencyBitcoinRoundedIcon />,
       accent: WARNING,
     },

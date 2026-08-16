@@ -17,7 +17,6 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const result = await getMethod("/api/dashboard/info");
-      console.log("Dashboard Info ", result);
 
       if (result.error) {
         toast.error(result.error?.message || "Dashboard Fetch failed.");

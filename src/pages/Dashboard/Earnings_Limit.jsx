@@ -13,7 +13,6 @@ import SavingsRoundedIcon from "@mui/icons-material/SavingsRounded";
 
 const Earnings_Limit = ({ data }) => {
   const overallCap = Number(data?.overallCap || 0);
-  console.log("overallCap", data);
   const totalEarned = Number(data?.totalEarned || 0);
 
   const remaining = Math.max(overallCap - totalEarned, 0);

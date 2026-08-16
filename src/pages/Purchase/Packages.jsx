@@ -96,7 +96,6 @@ function BottomFeature({ icon, title, subtitle, color }) {
 
 function PackageCard({ item, quantity = 0, onAdd, data }) {
   const alreadyAdded = quantity > 0;
-  console.log("onadd");
 
   return (
     <Paper
@@ -415,7 +414,6 @@ function CartContent({
   setCart,
   isMobile = false,
 }) {
-  console.log("packages", cart);
   const [purchasing, setPurchasing] = useState(false);
   const [walletType, setWalletType] = useState("fund");
 

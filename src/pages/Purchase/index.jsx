@@ -54,7 +54,6 @@ const PurchasePage = () => {
     try {
       setLoading(true);
       const result = await getMethod("/api/packages/info");
-      console.log("purchaseinfo", result);
       if (result?.error) {
         toast.error(result.error?.message || "Failed to load packages data");
       } else {
