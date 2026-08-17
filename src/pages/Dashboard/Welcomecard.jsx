@@ -31,9 +31,10 @@ export default function WelcomeCard({ user }) {
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   const [copied, setCopied] = useState(false);
-  const referralCode = "100000";
-  // const referralLink = `https://serot_api.haloquant.com/signup?ref=SN${user?.superId || referralCode}`;
-  const referralLink = `http://localhost:3000/signup?ref=SN${user?.superId || referralCode}`;
+  const referralCode = "SN100000";
+  const Url = process.env.REACT_APP_REFERRAL_BASE_URL;
+  const referralLink = `${Url}?ref=SN${user?.superId || referralCode}`;
+  // const referralLink = `http://localhost:3000/signup?ref=SN${user?.superId || referralCode}`;
 
   const hour = new Date().getHours();
   const getGreeting = () => {
