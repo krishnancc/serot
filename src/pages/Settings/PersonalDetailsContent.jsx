@@ -142,7 +142,6 @@ const PersonalDetailsContent = () => {
     try {
       const result = await getMethod("/api/user/profile");
       const profile = result.data;
-      console.log("profile", profile);
       const data = {
         username: profile.username || "",
         email: profile.email || "",
@@ -153,7 +152,6 @@ const PersonalDetailsContent = () => {
       const superProfilePic = profile?.profilePicUrl
         ? `${process.env.REACT_APP_BASE_URL}${profile.profilePicUrl}`
         : null;
-      console.log("superprofile", superProfilePic);
       setProfileData(data);
       setPreview(superProfilePic || null);
 

@@ -49,7 +49,6 @@ const Sidebar = ({ tab, setTab, handleLogout, user, loadingUser }) => {
       setTab(item.id);
     }
   };
-  console.log("user", user);
 
   return (
     <Card
