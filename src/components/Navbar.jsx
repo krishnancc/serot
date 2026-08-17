@@ -322,7 +322,13 @@ const Navbar = () => {
             }}
           >
             <Avatar
-              src={user?.profilePicUrl || undefined}
+              src={
+                user?.profilePicUrl
+                  ? user.profilePicUrl.startsWith("http")
+                    ? user.profilePicUrl
+                    : `${process.env.REACT_APP_BASE_URL}${user.profilePicUrl}`
+                  : undefined
+              }
               alt={user?.username || "User"}
               sx={{
                 width: { xs: 34, sm: 34, md: 34 },
@@ -367,7 +373,7 @@ const Navbar = () => {
                   whiteSpace: "nowrap",
                 }}
               >
-                User ID : SN {user?.superId || "-"}
+                User ID : SN{user?.superId || "-"}
               </Typography>
             </Box>
           </Box>
@@ -415,7 +421,13 @@ const Navbar = () => {
             }}
           >
             <Avatar
-              src={user?.profilePicUrl || undefined}
+              src={
+                user?.profilePicUrl
+                  ? user.profilePicUrl.startsWith("http")
+                    ? user.profilePicUrl
+                    : `${process.env.REACT_APP_BASE_URL}${user.profilePicUrl}`
+                  : undefined
+              }
               alt={user?.username || "User"}
               sx={{
                 width: 72,
@@ -450,7 +462,7 @@ const Navbar = () => {
               }}
             >
               <Typography fontSize={11} fontWeight={700}>
-                User Id : SN {user?.superId}
+                User Id : SN{user?.superId}
               </Typography>
             </Box>
           </Box>

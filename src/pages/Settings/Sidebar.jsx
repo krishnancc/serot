@@ -49,6 +49,7 @@ const Sidebar = ({ tab, setTab, handleLogout, user, loadingUser }) => {
       setTab(item.id);
     }
   };
+  console.log("user", user);
 
   return (
     <Card
@@ -91,28 +92,31 @@ const Sidebar = ({ tab, setTab, handleLogout, user, loadingUser }) => {
         }}
       >
         <Avatar
+          src={
+            user?.profilePicUrl
+              ? user.profilePicUrl.startsWith("http")
+                ? user.profilePicUrl
+                : `${process.env.REACT_APP_BASE_URL}${user.profilePicUrl}`
+              : undefined
+          }
+          alt={user?.username || "Profile"}
           sx={{
             width: {
               xs: 64,
               sm: 80,
               md: 92,
             },
-
             height: {
               xs: 64,
               sm: 80,
               md: 92,
             },
-
             mx: "auto",
-
             background: "linear-gradient(135deg,#2563eb,#9333ea)",
-
             fontSize: {
               xs: 24,
               md: 34,
             },
-
             fontWeight: 800,
           }}
         >
@@ -161,7 +165,7 @@ const Sidebar = ({ tab, setTab, handleLogout, user, loadingUser }) => {
           }}
         >
           <Typography color="text.secondary" fontSize={12} mt={0.5}>
-            User Id : SN {user?.superId}
+            User Id : SN{user?.superId}
           </Typography>
         </Box>
       </Box>

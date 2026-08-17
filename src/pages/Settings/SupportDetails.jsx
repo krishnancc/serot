@@ -247,16 +247,18 @@ function CategoryPicker({ value, onChange, error }) {
   );
 }
 
-/* ================= VALIDATION (Yup) ================= */
+/* ================= VALIDATION (Yup) =================
+   NOTE: `category` was previously required here, but the
+   <CategoryPicker /> that sets it is commented out below —
+   so `category` could never be filled in and validation
+   silently failed on every submit. Removed until the picker
+   is re-enabled (see CategoryPicker usage further down). */
 
 const TicketSchema = Yup.object({
   subject: Yup.string().min(5, "Subject required").required("Subject required"),
   description: Yup.string()
     .min(10, "Message required")
     .required("Message required"),
-  category: Yup.mixed()
-    .oneOf(Object.keys(CATEGORY_TOKENS), "Choose a category")
-    .required("Choose a category"),
 });
 
 const ReplySchema = Yup.object({
@@ -397,7 +399,10 @@ const SupportDetails = () => {
         const formData = new FormData();
         formData.append("subject", values.subject);
         formData.append("description", values.description);
-        formData.append("category", values.category);
+        // `category` is currently not collected in the UI (picker is
+        // commented out). Send a safe default so the backend still
+        // gets a value; swap this out if/when the picker is re-enabled.
+        formData.append("category", values.category || "OTHER");
         images.forEach((img) => formData.append("images", img));
 
         const result = await postFormData("/api/tickets", formData);
@@ -595,7 +600,12 @@ const SupportDetails = () => {
             sx={{ ...fieldSx, mb: 3, mt: 1 }}
           />
 
-          {/* <Typography sx={eyebrowSx}>Category</Typography>
+          {/* Category picker intentionally disabled — TicketSchema no
+                    longer requires `category`, and a default of "OTHER" is
+                    sent on submit. Re-enable both together if you want users
+                    to choose a category again:
+
+                    <Typography sx={eyebrowSx}>Category</Typography>
                     <Box sx={{ mt: 1, mb: 3 }}>
                         <CategoryPicker
                             value={ticketForm.values.category}

@@ -88,7 +88,7 @@ const StatItem = ({ title, value, subtitle, icon, accent }) => (
     <Box position="relative" zIndex={2}>
       <Typography
         sx={{
-          fontSize: { xs: 30, md: 42 },
+          fontSize: { xs: 30, md: 30 },
           fontWeight: 900,
           color: TEXT,
           lineHeight: 1,
