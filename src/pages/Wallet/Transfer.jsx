@@ -740,6 +740,7 @@ export default function Transfer({ balances = {}, onSuccess }) {
             </Stack>
 
             <Button
+              sx={{ backgroundColor: PRIMARY }}
               type="submit"
               variant="contained"
               disabled={
@@ -798,6 +799,7 @@ export default function Transfer({ balances = {}, onSuccess }) {
             />
 
             <Button
+              sx={{ backgroundColor: PRIMARY }}
               type="submit"
               variant="contained"
               disabled={otpForm.isSubmitting || otpForm.values.otp.length < 4}
