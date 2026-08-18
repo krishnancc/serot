@@ -59,12 +59,8 @@ const Login = () => {
       setLoading(true);
 
       try {
-        console.log("Form Values:", values);
-
         // Call Login API
         const response = await authSignIn("/api/auth/signin", values);
-
-        console.log("API Response:", response);
 
         // Handle API Error
         if (!response || response.error) {
@@ -94,16 +90,16 @@ const Login = () => {
         }
 
         // Store Token
-        localStorage.setItem("token", resData.accessToken);
+        localStorage.setItem("serot_token", resData.accessToken);
 
         if (values.rememberMe) {
-          localStorage.setItem("token", resData.accessToken);
+          localStorage.setItem("serot_token", resData.accessToken);
 
           if (resData.user) {
             localStorage.setItem("serot_user", JSON.stringify(resData.user));
           }
         } else {
-          sessionStorage.setItem("token", resData.accessToken);
+          sessionStorage.setItem("serot_token", resData.accessToken);
 
           if (resData.user) {
             sessionStorage.setItem("serot_user", JSON.stringify(resData.user));
@@ -111,13 +107,9 @@ const Login = () => {
         }
         // Optional: Store User Details
         if (resData.user) {
-          localStorage.setItem("unison_user", JSON.stringify(resData.user));
+          localStorage.setItem("serot_user", JSON.stringify(resData.user));
         }
 
-        // Optional: Clear Form
-        // reset();
-
-        // toast.success("Logged in successfully ✅");
         navigate("/");
       } catch (error) {
         console.error("Login Error:", error);

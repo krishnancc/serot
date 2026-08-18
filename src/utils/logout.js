@@ -1,5 +1,5 @@
 export const logoutUser = () => {
-  localStorage.removeItem("token");
+  localStorage.removeItem("serot_token");
   localStorage.clear();
 
   // optional: clear session storage

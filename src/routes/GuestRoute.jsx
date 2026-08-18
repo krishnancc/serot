@@ -1,13 +1,13 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 
 const GuestRoute = ({ children }) => {
-    const token = localStorage.getItem('token');
+  const token = localStorage.getItem("serot_token");
 
-    if (token) {
-        return <Navigate to="/" replace />;
-    }
+  if (token) {
+    return <Navigate to="/" replace />;
+  }
 
-    return children;
+  return children;
 };
 
 export default GuestRoute;

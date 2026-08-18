@@ -26,8 +26,8 @@ const Settings = () => {
 
   const PROFILE_CACHE_KEY = "user_profile_cache";
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    sessionStorage.removeItem("token");
+    localStorage.removeItem("serot_token");
+    sessionStorage.removeItem("serot_token");
     sessionStorage.removeItem(PROFILE_CACHE_KEY);
     navigate("/signin", { replace: true });
   };
@@ -57,7 +57,7 @@ const Settings = () => {
     setLoadingUser(true);
 
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("serot_token");
 
       if (!token) {
         console.log("Token not found");

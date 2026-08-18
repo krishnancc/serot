@@ -166,7 +166,7 @@ const Dashboard = () => {
           px: {
             xs: 0, // 16px on mobile
             sm: 0, // 24px on tablet
-            md: 10, // 32px on desktop
+            md: 6, // 32px on desktop
           },
         }}
       >

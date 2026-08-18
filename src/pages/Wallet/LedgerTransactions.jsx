@@ -166,7 +166,7 @@ const LedgerTransactions = () => {
               color: value === "CREDITED" ? "success.main" : "error.main",
             }}
           >
-            {value}
+            {value === "CREDITED" ? "SUCCESS" : value}
           </Box>
         ),
       },
@@ -613,6 +613,27 @@ const MobileLedgerList = ({ rows, loading, onPageChange }) => {
                     : row.balanceType === "MAIN"
                       ? "AVAILABLE"
                       : row.balanceType}
+                </Typography>
+              </Stack>
+
+              <Stack
+                direction="row"
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                }}
+              >
+                <Typography fontSize={13} fontWeight={700} color={PRIMARY_DARK}>
+                  Status
+                </Typography>
+                <Typography
+                  fontSize={12}
+                  sx={{
+                    color: row.status === "CREDITED" ? "#047857" : "#B45309",
+                  }}
+                >
+                  {row.status === "CREDITED" ? "SUCCESS" : row.status}
                 </Typography>
               </Stack>
             </Stack>
