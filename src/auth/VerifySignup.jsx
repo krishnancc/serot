@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 
 import { authSignIn } from "../api/login";
 import AuthLeft from "./AuthLeft";
+import LogoMobile from "./LogoMobile";
 function maskEmail(email = "") {
   if (!email || !email.includes("@")) {
     return "";
@@ -229,35 +230,7 @@ const VerifySignup = () => {
                 mb: 4,
               }}
             >
-              <Box
-                sx={{
-                  width: { xs: 56, sm: 70 },
-
-                  height: { xs: 56, sm: 70 },
-
-                  borderRadius: 4,
-
-                  display: "flex",
-
-                  alignItems: "center",
-
-                  justifyContent: "center",
-
-                  fontSize: { xs: 26, sm: 32 },
-
-                  fontWeight: 900,
-
-                  color: "#fff",
-
-                  background: "linear-gradient(135deg,#2563eb,#7c3aed)",
-                }}
-              >
-                N
-              </Box>
-
-              <Typography mt={2} fontSize={{ xs: 19, sm: 22 }} fontWeight={800}>
-                Serot
-              </Typography>
+              <LogoMobile />
             </Box>
 
             <Typography

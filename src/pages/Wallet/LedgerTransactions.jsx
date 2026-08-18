@@ -548,7 +548,8 @@ const MobileLedgerList = ({ rows, loading, onPageChange }) => {
                   Source
                 </Typography>
                 <Typography fontSize={12} color="text.secondary">
-                  {row.source || "—"}
+                  {/* {row.source || "—"} */}
+                  {row.source === "DIRECT" ? "SPOT" : row.source}
                 </Typography>
               </Stack>
 
@@ -606,7 +607,13 @@ const MobileLedgerList = ({ rows, loading, onPageChange }) => {
                 <Typography fontSize={13} fontWeight={700} color={PRIMARY_DARK}>
                   Wallet
                 </Typography>
-                <Typography fontSize={12}>{row.balanceType}</Typography>
+                <Typography fontSize={12}>
+                  {row.balanceType === "FUND"
+                    ? "SUPER"
+                    : row.balanceType === "MAIN"
+                      ? "AVAILABLE"
+                      : row.balanceType}
+                </Typography>
               </Stack>
             </Stack>
             <Divider sx={{ my: 1, borderColor: alpha(BORDER, 0.9) }} />

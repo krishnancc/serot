@@ -24,6 +24,7 @@ import * as Yup from "yup";
 
 import { authSignIn } from "../api/login";
 import AuthLeft from "./AuthLeft";
+import LogoMobile from "./LogoMobile";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
@@ -180,37 +181,7 @@ const ResetPassword = () => {
                 mb: 4,
               }}
             >
-              <Box
-                sx={{
-                  width: { xs: 56, sm: 70 },
-
-                  height: { xs: 56, sm: 70 },
-
-                  borderRadius: 4,
-
-                  display: "flex",
-
-                  alignItems: "center",
-
-                  justifyContent: "center",
-
-                  fontSize: { xs: 26, sm: 32 },
-
-                  fontWeight: 900,
-
-                  color: "#fff",
-
-                  background: "linear-gradient(135deg,#2563eb,#7c3aed)",
-
-                  boxShadow: "0 15px 35px rgba(37,99,235,.35)",
-                }}
-              >
-                S
-              </Box>
-
-              <Typography mt={2} fontSize={{ xs: 19, sm: 22 }} fontWeight={800}>
-                Serot
-              </Typography>
+              <LogoMobile />
             </Box>
 
             <Typography

@@ -892,7 +892,7 @@ function CartContent({
         <Button
           fullWidth
           variant="contained"
-          disabled={cart.length === 0 || insufficientBalance}
+          disabled={purchasing || cart.length === 0 || insufficientBalance}
           endIcon={
             purchasing ? (
               <CircularProgress size={18} color="inherit" />

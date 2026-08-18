@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import Serot_logo from "../images/Serot_logo.png";
 
 const AuthLeft = () => {
   return (
@@ -34,29 +35,49 @@ const AuthLeft = () => {
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: 2,
+          gap: 1,
           mb: 8,
         }}
       >
         <Box
           sx={{
-            width: 60,
-            height: 60,
-            borderRadius: 3,
-            background: "#fff",
-            color: "#2563eb",
+            width: 54,
+            height: 54,
+            borderRadius: "12px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: 32,
-            fontWeight: 900,
+            // background: "linear-gradient(135deg, #2563EB, #7C3AED)",
+            overflow: "hidden",
+            flexShrink: 0,
+            // boxShadow: "0 4px 12px rgba(99, 102, 241, 0.25)",
           }}
         >
-          S
+          <Box
+            component="img"
+            src={Serot_logo}
+            alt="SEROT Logo"
+            sx={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              p: 0.7,
+              display: "block",
+            }}
+          />
         </Box>
 
-        <Typography fontSize={28} fontWeight={800}>
-          Serot
+        <Typography
+          sx={{
+            fontSize: 20,
+            fontWeight: 900,
+            letterSpacing: "-0.5px",
+            lineHeight: 1,
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+          }}
+        >
+          SEROT
         </Typography>
       </Box>
 
