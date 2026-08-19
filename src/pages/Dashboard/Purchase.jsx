@@ -7,11 +7,11 @@ import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
 
 const Purchase = ({ packages = {} }) => {
   const purchaseItems = [
-    {
-      label: "Total Purchased",
-      value: `${packages.totalPackagesPurchased || 0} Nos`,
-      icon: <ShoppingBagRoundedIcon />,
-    },
+    // {
+    //   label: "Total Purchased",
+    //   value: `${packages.totalPackagesPurchased || 0} Nos`,
+    //   icon: <ShoppingBagRoundedIcon />,
+    // },
     {
       label: "Purchased Value",
       value: `$ ${packages.totalPurchasedUsd || 0}`,
@@ -109,7 +109,7 @@ const Purchase = ({ packages = {} }) => {
             size={{
               xs: 12,
               sm: 6,
-              md: 3,
+              md: 4, // 3 for 4 Items
             }}
           >
             <Box
@@ -120,7 +120,8 @@ const Purchase = ({ packages = {} }) => {
                 p: 2,
                 borderRadius: "18px",
                 transition: "0.3s",
-
+                width: "100%",
+                boxSizing: "border-box",
                 "&:hover": {
                   background: "rgba(99,102,241,0.06)",
                 },
