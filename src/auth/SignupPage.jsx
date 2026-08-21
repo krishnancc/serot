@@ -52,8 +52,8 @@ const SignupPage = () => {
   useEffect(() => {
     if (!refFromUrl) return;
 
-    // Remove SN prefix
-    const referralId = refFromUrl.replace(/^SN/i, "").replace(/\D/g, "");
+    // Add Prefix
+    const referralId = refFromUrl.replace(/^SR/i, "").replace(/\D/g, "");
 
     if (referralId.length === 6) {
       formik.setFieldValue("referralId", referralId);
@@ -485,7 +485,7 @@ const SignupPage = () => {
                       <InputAdornment position="start">
                         <PeopleAlt sx={{ fontSize: 20 }} />
                         <Typography sx={{ ml: 0.2, color: "text.secondary" }}>
-                          SN
+                          SR
                         </Typography>
                       </InputAdornment>
                     ),

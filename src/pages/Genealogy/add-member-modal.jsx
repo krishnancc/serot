@@ -485,7 +485,7 @@ export function AddMemberModal({ open, referralId, onClose, onSuccess }) {
                       startAdornment: (
                         <InputAdornment position="start">
                           <Typography fontWeight={700} color="primary">
-                            UN
+                            SR
                           </Typography>
                         </InputAdornment>
                       ),
