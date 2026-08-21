@@ -91,7 +91,7 @@ const GenelogyTable = ({
             fontSize: 14,
           }}
         >
-          SN{value}
+          SR{value}
         </Box>
       ),
     },
@@ -462,7 +462,6 @@ const GenelogyTable = ({
                 onRowClick={(params) => handleRowClick(params.row.userId)}
                 disableRowSelectionOnClick
                 disableColumnMenu
-                pageSizeOptions={[10]}
                 pageSizeOptions={[10, 25, 50]}
                 initialState={{
                   pagination: {
